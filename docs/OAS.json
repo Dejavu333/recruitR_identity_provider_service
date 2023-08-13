@@ -24,9 +24,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Token"
-                }
+                "schema": {}
               }
             }
           },
@@ -128,18 +126,20 @@
       },
       "User": {
         "properties": {
-          "username": {
+          "email": {
             "type": "string",
-            "title": "Username"
+            "format": "email",
+            "title": "Email"
           },
           "password": {
             "type": "string",
+            "minLength": 8,
             "title": "Password"
           }
         },
         "type": "object",
         "required": [
-          "username",
+          "email",
           "password"
         ],
         "title": "User"

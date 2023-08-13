@@ -14,7 +14,7 @@ app = FastAPI()  # webapp
 PRIVATE_KEY = os.getenv("PRIVATE_KEY_ENVV", "supersecret")  # key to sign the JWT
 HOST = os.getenv("HOST_OPENAPI_ENVV", "localhost")
 PORT = int(os.getenv("PORT_ENVV", "6000"))
-users = {"testuser": "testpassword"}  # db
+users = {"test": "test"}  # db
 
 security = HTTPBearer()
 
@@ -30,7 +30,7 @@ class Token(BaseModel):
 # functions
 ####################################################
 def save_openapi_spec_to_file():
-    with open("OAS.json", "w") as f:
+    with open("../docs/OAS.json", "w") as f:
         json.dump(app.openapi(), f , indent=2)
 
 # openApi spec
