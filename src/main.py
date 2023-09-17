@@ -1,11 +1,11 @@
-from fastapi import FastAPI, HTTPException, Depends, Request
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-import jwt
-import json
 import datetime
+import json
 import os
+
+import jwt
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.security import HTTPBearer
 from pydantic import BaseModel, EmailStr, constr
-from typing import Optional
 
 ####################################################
 # setup 
@@ -19,12 +19,13 @@ users = {"test": "test"}  # db
 security = HTTPBearer()
 
 # validation
+# todo central syntactic validaiton, and domain specific validation in the downstream services, maybe schema repo
 class User(BaseModel):
     email: EmailStr
     password: constr(min_length=8)
 
 class Token(BaseModel):
-    token: str # todo central synthetic validaiton and domain specific validation in the downstream services, maybe schema repo
+    token: str
 
 ####################################################
 # functions
