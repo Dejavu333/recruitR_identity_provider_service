@@ -31,7 +31,7 @@ class Token(BaseModel):
 # functions
 ####################################################
 def save_openapi_spec_to_file():
-    with open("./docs/OAS.json", "w") as f:
+    with open("../docs/OAS.json", "w") as f:
         json.dump(app.openapi(), f , indent=2)
 
 # openApi spec
