@@ -181,7 +181,7 @@
   },
   "servers": [
     {
-      "url": "http://host.docker.internal:6000"
+      "url": "http://localhost:6000"
     }
   ]
 }

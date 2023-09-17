@@ -6,15 +6,26 @@ import jwt
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.security import HTTPBearer
 from pydantic import BaseModel, EmailStr, constr
+from starlette.middleware.cors import CORSMiddleware
 
 ####################################################
 # setup 
 ####################################################
 app = FastAPI()  # webapp
+# allow same origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 PRIVATE_KEY = os.getenv("PRIVATE_KEY_ENVV", "supersecret")  # key to sign the JWT
 HOST = os.getenv("HOST_OPENAPI_ENVV", "localhost")
 PORT = int(os.getenv("PORT_ENVV", "6000"))
-users = {"test": "test"}  # db
+users = {"test@test.com": "testtest"}  # db
 
 security = HTTPBearer()
 
@@ -38,7 +49,7 @@ def save_openapi_spec_to_file():
 def setup_host_in_openapi_spec():
     openapi_schema = app.openapi()
     openapi_schema["servers"] = [{
-            "url": f"http://host.docker.internal:{PORT}" # if debug and windows OS, use http://host.docker.internal to reach host machine
+            "url": f"http://localhost:{PORT}" # if docker debug and windows OS, use http://host.docker.internal to reach host machine
         }]
 
 @app.on_event("startup")
