@@ -21,9 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 PRIVATE_KEY = os.getenv("PRIVATE_KEY_ENVV", "supersecret")  # key to sign the JWT
-HOST = os.getenv("HOST_OPENAPI_ENVV", "localhost")
+HOST = os.getenv("HOST_ENVV", "localhost")
 PORT = int(os.getenv("PORT_ENVV", "6000"))
 users = {"test@test.com": "testtest", "test2@test2.com": "test2test2"}
 
