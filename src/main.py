@@ -51,8 +51,7 @@ def setup_host_in_openapi_spec():
             "url": f"http://localhost:{PORT}" # if docker debug and windows OS, use http://host.docker.internal to reach host machine
         }]
 
-@app.on_event("startup")
-def startup_event():
+def setupOpenApi():
     setup_host_in_openapi_spec()
     save_openapi_spec_to_file()
 
@@ -96,6 +95,6 @@ async def authorize(request: Request):
 # main
 ####################################################
 if __name__ == '__main__':
-    save_openapi_spec_to_file()
+    setupOpenApi()
     import uvicorn # asynchronous server implementation
     uvicorn.run(app, host=HOST, port=PORT)
